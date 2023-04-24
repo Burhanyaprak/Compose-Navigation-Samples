@@ -15,12 +15,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavController
 import com.burhanyaprak.composenavigationsamples.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(navController: NavController) {
+fun MainScreen(onNavigateToDetail: (String) -> Unit) {
     var username by remember {
         mutableStateOf("")
     }
@@ -35,7 +34,7 @@ fun MainScreen(navController: NavController) {
             username = it
         })
         Button(onClick = {
-            navController.navigate(Screen.Detail.route.replace("{username}", username))
+            onNavigateToDetail(username)
         }) {
             Text(text = stringResource(id = R.string.go_detail))
         }
